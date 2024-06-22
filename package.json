@@ -1,0 +1,17 @@
+{
+  "name": "forgetful-savant",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bunx prettier --write ./src && bun build ./src/index.ts --outdir ./pages --minify",
+    "format": "bunx prettier --write ./src",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.3.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.5.2"
+  }
+}
