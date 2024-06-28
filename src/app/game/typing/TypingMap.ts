@@ -268,6 +268,12 @@ export class TypingMap {
     this.map.set('zyu', ['じ', 'ゅ'])
     this.map.set('zye', ['じ', 'ぇ'])
     this.map.set('zyo', ['じ', 'ょ'])
+    // ch
+    this.map.set('cha', ['ち', 'ゃ'])
+    this.map.set('chi', ['ち'])
+    this.map.set('chu', ['ち', 'ゅ'])
+    this.map.set('che', ['ち', 'ぇ'])
+    this.map.set('cho', ['ち', 'ょ'])
     // ts
     this.map.set('tsa', ['つ', 'ぁ'])
     this.map.set('tsi', ['つ', 'ぃ'])
@@ -345,25 +351,20 @@ export class TypingMap {
     return this.set.has(c)
   }
 
-  public convert(buffer: string[]) {
-    const temp = []
-    for (let i = 0; i < 3; ++i) {
-      const c = buffer.pop()
-      if (c === undefined) {
-        break
+  public convert(pending: string): readonly string[] {
+    for (let count = 0; count < 3; ++count) {
+      const i = 3 - count
+      if (i > pending.length) {
+        continue
       }
-      if (!this.isAvailable(c)) {
-        buffer.push(c)
-        break
+      const s = pending.slice(-i)
+      const r = this.map.get(s)
+      if (r === undefined) {
+        continue
       }
-      temp.push(c)
+      const f = pending.slice(0, pending.length - i).split('')
+      return f.concat(r)
     }
-    temp.reverse()
-    const value = this.map.get(temp.join(''))
-    if (value !== undefined) {
-      buffer.push(...value)
-    } else {
-      buffer.push(...temp)
-    }
+    return []
   }
 }
