@@ -7,7 +7,12 @@ export class QuestionManager {
   public constructor() {
     // TODO:
     this.questions = [
-      new Question('『坊ちゃん』や『こころ』の作者は？', ['なつめそうせき', 'なつめきんのすけ']),
+      new Question(
+        '『坊ちゃん』や『こころ』の作者は？',
+        ['なつめそうせき', 'なつめきんのすけ'],
+        300,
+        100000
+      ),
     ]
     this.current = this.questions[0]
   }

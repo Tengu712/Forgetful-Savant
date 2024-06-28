@@ -12,12 +12,14 @@ export class TypingManager {
     this.isSubmitted = false
   }
 
-  public update() {
+  public update(): boolean {
     if (this.isSubmitted) {
-      return
+      return false
     }
+    let isBackspaced = false
     for (const c of this.app.getInputListener().get()) {
       if (c === 'Backspace') {
+        isBackspaced = true
         this.buffer.pop()
         continue
       }
@@ -27,6 +29,7 @@ export class TypingManager {
       }
       this.buffer.push(c)
     }
+    return isBackspaced
   }
 
   public reject() {

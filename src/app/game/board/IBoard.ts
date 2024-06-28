@@ -1,3 +1,5 @@
+import type {TypingBuffer} from '../typing/TypingBuffer'
+
 export interface IBoard {
-  draw(): void
+  draw(typingBuffer: TypingBuffer): void
 }

@@ -45,6 +45,11 @@ export class Renderer implements IRenderer {
     this.context.fillRect(0, 0, this.width, this.height)
   }
 
+  public drawRect(l: number, t: number, w: number, h: number, r: number, g: number, b: number) {
+    this.context.fillStyle = `rgb(${r * 255}, ${g * 255}, ${b * 255})`
+    this.context.fillRect(l * this.width, t * this.height, w * this.width, h * this.height)
+  }
+
   public drawString(
     text: string,
     align: string,
