@@ -5,16 +5,18 @@ import type {IScene} from './scene/IScene'
 import {TitleScene} from './scene/TitleScene'
 
 export class App {
-  private scene: IScene
   private readonly renderer: IRenderer
   private readonly inputListener: IInputListener
   private readonly fpsMeasure: FpsMeasure
+  private scene: IScene
+  private timeStamp: number
 
   public constructor(renderer: IRenderer, inputListener: IInputListener) {
     this.renderer = renderer
     this.inputListener = inputListener
     this.fpsMeasure = new FpsMeasure()
     this.scene = new TitleScene(this)
+    this.timeStamp = 0
     this.onLooped = this.onLooped.bind(this)
   }
 
@@ -23,6 +25,7 @@ export class App {
   }
 
   private onLooped(timeStamp: number) {
+    this.timeStamp = timeStamp
     this.fpsMeasure.update(timeStamp)
     this.inputListener.update()
     this.scene = this.scene.update()
@@ -36,5 +39,9 @@ export class App {
 
   public getInputListener(): IInputListener {
     return this.inputListener
+  }
+
+  public getTimeStamp(): number {
+    return this.timeStamp
   }
 }
