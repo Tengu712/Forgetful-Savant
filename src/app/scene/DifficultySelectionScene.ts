@@ -14,18 +14,26 @@ const DIFFICULTIES = [
   {
     name: '簡潔明瞭',
     desc: 'キーボードを打ち始めて間もない人向け',
+    max: 750000,
+    min: 100000,
   },
   {
     name: '平談俗語',
     desc: 'キーボード入力も知識量も一般的な人向け',
+    max: 1250000,
+    min: 500000,
   },
   {
     name: '詰屈聱牙',
     desc: '少し歯ごたえが欲しい人向け',
+    max: 2500000,
+    min: 1000000,
   },
   {
     name: '槃根錯節',
     desc: '速筆サヴァン向け',
+    max: Number.MAX_VALUE,
+    min: 2000000,
   },
 ]
 
@@ -108,6 +116,9 @@ export class DifficultySelectionScene implements IScene {
       const shouldShowCA = this.resCursor === 0 || this.resCursor === 1
       const hasTimeLimit = this.resCursor === 1 || this.resCursor === 3
       const difInfo: DifficultyInformation = {
+        questions: this.app.getQuestions(),
+        max: DIFFICULTIES[this.difCursor].max,
+        min: DIFFICULTIES[this.difCursor].min,
         questionsCount: questionsCount,
         shouldShowCA: shouldShowCA,
         hasTimeLimit: hasTimeLimit,

@@ -29,14 +29,14 @@ export class Board {
 
   private drawWithoutCA(typingBuffer: TypingBuffer) {
     const renderer = this.app.getRenderer()
-    renderer.drawString(this.questionManager.get().getText(), 'center', 20, 0.5, 0.25, 1, 1, 1)
+    renderer.drawString(this.questionManager.get().t, 'center', 20, 0.5, 0.25, 1, 1, 1)
     renderer.drawString(typingBuffer.get(), 'center', 18, 0.5, 0.4, 1, 1, 1)
   }
 
   private drawWithCA(typingBuffer: TypingBuffer) {
     const [ca, m] = this.getCorrectAnswer(typingBuffer)
     const renderer = this.app.getRenderer()
-    renderer.drawString(this.questionManager.get().getText(), 'center', 20, 0.5, 0.25, 1, 1, 1)
+    renderer.drawString(this.questionManager.get().t, 'center', 20, 0.5, 0.25, 1, 1, 1)
     renderer.drawString(typingBuffer.get(), 'center', 18, 0.5, 0.4, 1, 1, 1)
     if (m) {
       renderer.drawString(ca, 'center', 18, 0.5, 0.35, 0.8, 0.8, 0.8)
@@ -47,7 +47,7 @@ export class Board {
 
   private getCorrectAnswer(typingBuffer: TypingBuffer): [string, boolean] {
     const answer = typingBuffer.getConfirmed()
-    const cas = this.questionManager.get().getCorrectAnswers()
+    const cas = this.questionManager.get().a
     for (const ca of cas) {
       if (ca.startsWith(answer)) {
         return [ca, true]

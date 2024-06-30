@@ -57,7 +57,7 @@ export class Score {
   }
 
   private getScoreAddition(): number {
-    const rawScore = this.questionManager.get().getScore()
+    const rawScore = this.questionManager.get().s
     const timeRatio = this.time.getRatio()
     return this.roundTrunc(rawScore * (1 - 0.9 * timeRatio))
   }

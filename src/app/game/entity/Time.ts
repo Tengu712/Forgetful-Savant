@@ -21,11 +21,11 @@ export class Time {
   }
 
   public isTimeUp(): boolean {
-    return this.count >= this.questionManager.get().getTimeLimit()
+    return this.count >= this.questionManager.get().l
   }
 
   public getRatio(): number {
-    return Math.min(1, this.count / this.questionManager.get().getTimeLimit())
+    return Math.min(1, this.count / this.questionManager.get().l)
   }
 
   public reset() {

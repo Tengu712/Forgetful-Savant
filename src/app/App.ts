@@ -1,8 +1,9 @@
-import {FpsMeasure} from './FpsMeasure'
+import type {Question} from './game/question/Question'
 import type {IRenderer} from './graphics/IRenderer'
 import type {IInputListener} from './input/IInputListener'
 import type {IScene} from './scene/IScene'
 import {TitleScene} from './scene/TitleScene'
+import {FpsMeasure} from './FpsMeasure'
 
 export class App {
   private readonly renderer: IRenderer
@@ -43,5 +44,22 @@ export class App {
 
   public getTimeStamp(): number {
     return this.timeStamp
+  }
+
+  public getQuestions(): readonly Question[] {
+    return [
+      {
+        t: '問題文1',
+        a: ['こたえ'],
+        l: 300,
+        s: 500000,
+      },
+      {
+        t: '問題文2',
+        a: ['こたえ'],
+        l: 300,
+        s: 1000000,
+      },
+    ]
   }
 }

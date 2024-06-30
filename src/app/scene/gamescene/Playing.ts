@@ -27,7 +27,7 @@ export class Playing implements ISubScene {
   public constructor(app: App, difInfo: DifficultyInformation) {
     this.app = app
     this.difInfo = difInfo
-    this.questionManager = new QuestionManager()
+    this.questionManager = new QuestionManager(difInfo.questions, difInfo.min, difInfo.max)
     this.typingManager = new TypingManager(app)
     this.board = new Board(app, this.questionManager, difInfo.shouldShowCA)
     this.folio = new Folio(app, difInfo.questionsCount)
@@ -58,7 +58,7 @@ export class Playing implements ISubScene {
     // check submittion
     if (this.typingManager.checkSubmitted()) {
       // correct
-      if (this.questionManager.get().solve(this.typingManager.getBuffer().get())) {
+      if (this.questionManager.solve(this.typingManager.getBuffer().get())) {
         this.result.incrementsCorrectsCount()
         this.score.add()
         this.goToNextQuestion()
