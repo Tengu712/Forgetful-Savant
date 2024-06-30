@@ -1,5 +1,5 @@
 export type DifficultyInformation = {
-  questionsCount: number
-  shouldShowCA: boolean
-  hasTimeLimit: boolean
+  readonly questionsCount: number
+  readonly shouldShowCA: boolean
+  readonly hasTimeLimit: boolean
 }

@@ -1,8 +1,9 @@
+import type {App} from '@/app/App'
+import type {DifficultyInformation} from '@/app/game/DifficultyInformation'
+
 import type {ISubScene} from './gamescene/ISubScene'
+import {Starting} from './gamescene/Starting'
 import type {IScene} from './IScene'
-import type {App} from '../App'
-import type {DifficultyInformation} from '../game/DifficultyInformation'
-import {Playing} from './gamescene/Playing'
 
 export class GameScene implements IScene {
   private readonly app: App
@@ -10,7 +11,7 @@ export class GameScene implements IScene {
 
   public constructor(app: App, difInfo: DifficultyInformation) {
     this.app = app
-    this.subScene = new Playing(app, difInfo)
+    this.subScene = new Starting(app, difInfo)
   }
 
   public update(): IScene {

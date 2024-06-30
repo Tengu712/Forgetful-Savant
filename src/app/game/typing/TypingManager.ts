@@ -1,6 +1,15 @@
 import type {App} from '@/app/App'
-import {TypingBuffer} from './TypingBuffer'
 
+import {TypingBuffer} from './TypingBuffer'
+import type {TypingResult} from './TypingResult'
+
+/**
+ * TypingBufferを制御するオブジェクト
+ *
+ * - IInputListenerからTypingBufferへ入力情報を流す
+ * - Backspaceで一文字消す
+ * - Enterで提出状態に移行する
+ */
 export class TypingManager {
   private readonly app: App
   private readonly buffer: TypingBuffer
@@ -12,24 +21,24 @@ export class TypingManager {
     this.isSubmitted = false
   }
 
-  public update(): boolean {
-    if (this.isSubmitted) {
-      return false
-    }
+  public update(): TypingResult {
+    let keysCount = 0
     let isBackspaced = false
     for (const c of this.app.getInputListener().get()) {
+      keysCount += 1
       if (c === 'Backspace') {
         isBackspaced = true
         this.buffer.pop()
-        continue
-      }
-      if (c === 'Enter') {
+      } else if (c === 'Enter') {
         this.isSubmitted = true
-        break
+      } else {
+        this.buffer.push(c)
       }
-      this.buffer.push(c)
     }
-    return isBackspaced
+    return {
+      keysCount: keysCount,
+      isBackspaced: isBackspaced,
+    }
   }
 
   public reject() {

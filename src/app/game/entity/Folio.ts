@@ -26,6 +26,10 @@ export class Folio {
     return this.count
   }
 
+  public isEnded(): boolean {
+    return this.count >= this.questionsCount
+  }
+
   public draw() {
     const s = (this.count + 1).toString() + '/' + this.questionsCount
     this.app.getRenderer().drawString(s, 'left', 14, 0.1, 0.2, 1, 1, 1)

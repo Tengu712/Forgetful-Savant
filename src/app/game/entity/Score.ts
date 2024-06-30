@@ -27,6 +27,10 @@ export class Score {
     this.score = initValue
   }
 
+  public getAsString(): string {
+    return this.score.toString().padStart(12, '0')
+  }
+
   public add() {
     const addition = this.getScoreAddition()
     this.score += addition + this.bonusScore
@@ -48,7 +52,7 @@ export class Score {
     const b = this.bonusScore.toString()
     renderer.drawString(a + '+' + b, 'right', 14, 0.9, 0.2, 1, 1, 1)
 
-    const s = this.score.toString().padStart(12, '0')
+    const s = this.getAsString()
     renderer.drawString(s, 'left', 16, 0.01, 0.1, 1, 1, 1)
   }
 
