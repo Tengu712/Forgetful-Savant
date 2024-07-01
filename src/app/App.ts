@@ -8,13 +8,19 @@ import {FpsMeasure} from './FpsMeasure'
 export class App {
   private readonly renderer: IRenderer
   private readonly inputListener: IInputListener
+  private readonly questions: readonly Question[]
   private readonly fpsMeasure: FpsMeasure
   private scene: IScene
   private timeStamp: number
 
-  public constructor(renderer: IRenderer, inputListener: IInputListener) {
+  public constructor(
+    renderer: IRenderer,
+    inputListener: IInputListener,
+    questions: readonly Question[]
+  ) {
     this.renderer = renderer
     this.inputListener = inputListener
+    this.questions = questions
     this.fpsMeasure = new FpsMeasure()
     this.scene = new TitleScene(this)
     this.timeStamp = 0
@@ -47,19 +53,6 @@ export class App {
   }
 
   public getQuestions(): readonly Question[] {
-    return [
-      {
-        t: '問題文1',
-        a: ['こたえ'],
-        l: 300,
-        s: 500000,
-      },
-      {
-        t: '問題文2',
-        a: ['こたえ'],
-        l: 300,
-        s: 1000000,
-      },
-    ]
+    return this.questions
   }
 }

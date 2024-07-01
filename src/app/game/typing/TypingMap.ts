@@ -1,6 +1,7 @@
 export class TypingMap {
   private readonly map: Map<string, readonly string[]>
-  private readonly set: Set<string>
+  private readonly sokuonSet: Set<string>
+  private readonly availableSet: Set<string>
 
   public constructor() {
     this.map = new Map()
@@ -8,6 +9,7 @@ export class TypingMap {
     this.map.set('-', ['ー'])
     this.map.set(',', ['、'])
     this.map.set('.', ['。'])
+    this.map.set('/', ['・'])
     // NUMERIC
     this.map.set('0', ['０'])
     this.map.set('1', ['１'])
@@ -281,90 +283,100 @@ export class TypingMap {
     this.map.set('tse', ['つ', 'ぇ'])
     this.map.set('tso', ['つ', 'ぉ'])
     // SOKUON
-    this.map.set('bb', ['っ', 'b'])
-    this.map.set('cc', ['っ', 'c'])
-    this.map.set('dd', ['っ', 'd'])
-    this.map.set('ff', ['っ', 'f'])
-    this.map.set('gg', ['っ', 'g'])
-    this.map.set('hh', ['っ', 'h'])
-    this.map.set('jj', ['っ', 'j'])
-    this.map.set('kk', ['っ', 'k'])
-    this.map.set('ll', ['っ', 'l'])
-    this.map.set('mm', ['っ', 'm'])
-    this.map.set('pp', ['っ', 'p'])
-    this.map.set('qq', ['っ', 'q'])
-    this.map.set('rr', ['っ', 'r'])
-    this.map.set('ss', ['っ', 's'])
-    this.map.set('tt', ['っ', 't'])
-    this.map.set('vv', ['っ', 'v'])
-    this.map.set('ww', ['っ', 'w'])
-    this.map.set('xx', ['っ', 'x'])
-    this.map.set('yy', ['っ', 'y'])
-    this.map.set('zz', ['っ', 'z'])
     this.map.set('ltu', ['っ'])
     // HATSUON
     this.map.set('nn', ['ん'])
 
-    this.set = new Set()
-    this.set.add('a')
-    this.set.add('b')
-    this.set.add('c')
-    this.set.add('d')
-    this.set.add('e')
-    this.set.add('f')
-    this.set.add('g')
-    this.set.add('h')
-    this.set.add('i')
-    this.set.add('j')
-    this.set.add('k')
-    this.set.add('l')
-    this.set.add('m')
-    this.set.add('n')
-    this.set.add('o')
-    this.set.add('p')
-    this.set.add('q')
-    this.set.add('r')
-    this.set.add('s')
-    this.set.add('t')
-    this.set.add('u')
-    this.set.add('v')
-    this.set.add('w')
-    this.set.add('x')
-    this.set.add('y')
-    this.set.add('z')
-    this.set.add('0')
-    this.set.add('1')
-    this.set.add('2')
-    this.set.add('3')
-    this.set.add('4')
-    this.set.add('5')
-    this.set.add('6')
-    this.set.add('7')
-    this.set.add('8')
-    this.set.add('9')
-    this.set.add('-')
-    this.set.add(',')
-    this.set.add('.')
+    this.sokuonSet = new Set()
+    this.sokuonSet.add('bb')
+    this.sokuonSet.add('cc')
+    this.sokuonSet.add('dd')
+    this.sokuonSet.add('ff')
+    this.sokuonSet.add('gg')
+    this.sokuonSet.add('hh')
+    this.sokuonSet.add('jj')
+    this.sokuonSet.add('kk')
+    this.sokuonSet.add('ll')
+    this.sokuonSet.add('mm')
+    this.sokuonSet.add('pp')
+    this.sokuonSet.add('qq')
+    this.sokuonSet.add('rr')
+    this.sokuonSet.add('ss')
+    this.sokuonSet.add('tt')
+    this.sokuonSet.add('vv')
+    this.sokuonSet.add('ww')
+    this.sokuonSet.add('xx')
+    this.sokuonSet.add('yy')
+    this.sokuonSet.add('zz')
+
+    this.availableSet = new Set()
+    this.availableSet.add('a')
+    this.availableSet.add('b')
+    this.availableSet.add('c')
+    this.availableSet.add('d')
+    this.availableSet.add('e')
+    this.availableSet.add('f')
+    this.availableSet.add('g')
+    this.availableSet.add('h')
+    this.availableSet.add('i')
+    this.availableSet.add('j')
+    this.availableSet.add('k')
+    this.availableSet.add('l')
+    this.availableSet.add('m')
+    this.availableSet.add('n')
+    this.availableSet.add('o')
+    this.availableSet.add('p')
+    this.availableSet.add('q')
+    this.availableSet.add('r')
+    this.availableSet.add('s')
+    this.availableSet.add('t')
+    this.availableSet.add('u')
+    this.availableSet.add('v')
+    this.availableSet.add('w')
+    this.availableSet.add('x')
+    this.availableSet.add('y')
+    this.availableSet.add('z')
+    this.availableSet.add('0')
+    this.availableSet.add('1')
+    this.availableSet.add('2')
+    this.availableSet.add('3')
+    this.availableSet.add('4')
+    this.availableSet.add('5')
+    this.availableSet.add('6')
+    this.availableSet.add('7')
+    this.availableSet.add('8')
+    this.availableSet.add('9')
+    this.availableSet.add('-')
+    this.availableSet.add(',')
+    this.availableSet.add('.')
+    this.availableSet.add('/')
   }
 
   public isAvailable(c: string): boolean {
-    return this.set.has(c)
+    return this.availableSet.has(c)
   }
 
-  public convert(pending: string): readonly string[] {
+  public convert(pending: string): [readonly string[], string | null] {
     for (let count = 0; count < 3; ++count) {
       const i = 3 - count
       if (i > pending.length) {
         continue
       }
       const s = pending.slice(-i)
-      const r = this.map.get(s)
-      if (r === undefined) {
-        continue
+      // check sokuon
+      if (this.sokuonSet.has(s)) {
+        const f = pending.slice(0, pending.length - i).split('')
+        f.push('っ')
+        return [f, s[0]]
       }
-      const f = pending.slice(0, pending.length - i).split('')
-      return f.concat(r)
+      // otherwise
+      const r = this.map.get(s)
+      if (r !== undefined) {
+        const f = pending.slice(0, pending.length - i).split('')
+        const a = f.concat(r)
+        return [a, null]
+      }
     }
-    return []
+    return [[], null]
   }
 }

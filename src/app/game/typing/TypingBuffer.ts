@@ -44,10 +44,13 @@ export class TypingBuffer {
       return
     }
     this.pending.push(c)
-    const newConfirmed = this.map.convert(this.getPending())
+    const [newConfirmed, newPending] = this.map.convert(this.getPending())
     if (newConfirmed.length > 0) {
       this.confirmed = this.confirmed.concat(newConfirmed)
       this.pending = []
+    }
+    if (newPending !== null) {
+      this.pending.push(newPending)
     }
   }
 }
