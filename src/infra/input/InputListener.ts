@@ -9,6 +9,8 @@ export class InputListener implements IInputListener {
     this.previous = []
     document.addEventListener('keydown', (event) => {
       this.buffer.push(event.key)
+      event.preventDefault()
+      event.stopImmediatePropagation()
     })
   }
 
