@@ -1,6 +1,8 @@
 import type {App} from '@/app/App'
 import type {QuestionManager} from '@/app/game/question/QuestionManager'
 
+const TIME_LIMIT = 240
+
 /**
  * 回答時間に関するオブジェクト
  *
@@ -11,21 +13,19 @@ import type {QuestionManager} from '@/app/game/question/QuestionManager'
  */
 export class Time {
   private readonly app: App
-  private readonly questionManager: QuestionManager
   private count: number
 
-  public constructor(app: App, questionManager: QuestionManager) {
+  public constructor(app: App) {
     this.app = app
-    this.questionManager = questionManager
     this.count = 0
   }
 
   public isTimeUp(): boolean {
-    return this.count >= this.questionManager.get().l
+    return this.count >= TIME_LIMIT
   }
 
   public getRatio(): number {
-    return Math.min(1, this.count / this.questionManager.get().l)
+    return Math.min(1, this.count / TIME_LIMIT)
   }
 
   public reset() {

@@ -22,7 +22,6 @@ describe('AsQuestions()', () => {
       questions: [
         {
           a: ['こたえ'],
-          l: 300,
           s: 1000,
         },
       ],
@@ -36,13 +35,11 @@ describe('AsQuestions()', () => {
         {
           t: '問題文',
           a: ['こたえ'],
-          l: 300,
           s: 1000,
         },
         {
           t: 12,
           a: ['こたえ'],
-          l: 300,
           s: 1000,
         },
       ],
@@ -55,7 +52,6 @@ describe('AsQuestions()', () => {
       questions: [
         {
           t: '問題文',
-          l: 300,
           s: 1000,
         },
       ],
@@ -69,13 +65,11 @@ describe('AsQuestions()', () => {
         {
           t: '問題文',
           a: ['こたえ'],
-          l: 300,
           s: 1000,
         },
         {
           t: '問題文',
           a: 1,
-          l: 300,
           s: 1000,
         },
       ],
@@ -89,40 +83,6 @@ describe('AsQuestions()', () => {
         {
           t: '問題文',
           a: ['こたえ', 0],
-          l: 300,
-          s: 1000,
-        },
-      ],
-    }
-    expect(() => AsQuestions(questions)).toThrow()
-  })
-
-  test('if l is undefined it throws an error.', () => {
-    const questions = {
-      questions: [
-        {
-          t: '問題文',
-          a: ['こたえ'],
-          s: 1000,
-        },
-      ],
-    }
-    expect(() => AsQuestions(questions)).toThrow()
-  })
-
-  test('if l is not number it throws an error.', () => {
-    const questions = {
-      questions: [
-        {
-          t: '問題文',
-          a: ['こたえ'],
-          l: 300,
-          s: 1000,
-        },
-        {
-          t: '問題文',
-          a: ['こたえ'],
-          l: 'foo',
           s: 1000,
         },
       ],
@@ -136,7 +96,6 @@ describe('AsQuestions()', () => {
         {
           t: '問題文',
           a: ['こたえ'],
-          l: 300,
         },
       ],
     }
@@ -149,13 +108,11 @@ describe('AsQuestions()', () => {
         {
           t: '問題文',
           a: ['こたえ'],
-          l: 300,
           s: 1000,
         },
         {
           t: '問題文',
           a: ['こたえ'],
-          l: 300,
           s: {s: 1000},
         },
       ],
@@ -169,13 +126,11 @@ describe('AsQuestions()', () => {
         {
           t: '問題文',
           a: ['こたえ'],
-          l: 300,
           s: 1000,
         },
         {
           t: '問題文',
           a: ['こたえ'],
-          l: 300,
           s: 1000,
         },
       ],
@@ -184,13 +139,11 @@ describe('AsQuestions()', () => {
       {
         t: '問題文',
         a: ['こたえ'],
-        l: 300,
         s: 1000,
       },
       {
         t: '問題文',
         a: ['こたえ'],
-        l: 300,
         s: 1000,
       },
     ]

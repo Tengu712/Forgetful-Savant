@@ -31,7 +31,7 @@ export class Playing implements ISubScene {
     this.typingManager = new TypingManager(app)
     this.board = new Board(app, this.questionManager, difInfo.shouldShowCA)
     this.folio = new Folio(app, difInfo.questionsCount)
-    this.time = new Time(app, this.questionManager)
+    this.time = new Time(app)
     this.score = new Score(app, this.questionManager, this.time, 0)
     this.result = new Result(app, this.score)
   }

@@ -1,7 +1,6 @@
 export type Question = {
   readonly t: string
   readonly a: readonly string[]
-  readonly l: number
   readonly s: number
 }
 
@@ -41,7 +40,6 @@ export function AsQuestions(source: any): readonly Question[] {
     for (let i = 0; i < n.a.length; ++i) {
       checkString(n.a[i], 'a[' + i + ']', n.t)
     }
-    checkNumber(n.l, 'l', n.t)
     checkNumber(n.s, 's', n.t)
   }
   return source.questions as Question[]

@@ -10,12 +10,6 @@ fn write_copying(writer: &mut BufWriter<impl Write>, words: Vec<&str>, is_first:
         return;
     }
 
-    let l = std::cmp::max(180, -2 * x * x / 10 + 10 * x + 210);
-    if l < 0 {
-        println!("[ warning ] The time limit is {l}: {t}");
-        return;
-    }
-
     let s = if x <= 7 {
         std::cmp::max(100000, 60000 * x - 140000)
     } else {
@@ -32,7 +26,6 @@ fn write_copying(writer: &mut BufWriter<impl Write>, words: Vec<&str>, is_first:
         "{c}    {{
       \"t\": \"{t}\",
       \"a\": [\"{a}\"],
-      \"l\": {l},
       \"s\": {s}
     }}"
     );
