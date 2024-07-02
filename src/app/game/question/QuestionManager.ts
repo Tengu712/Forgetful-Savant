@@ -15,7 +15,7 @@ export class QuestionManager {
   public constructor(source: readonly Question[], min: number, max: number) {
     const questions = []
     for (const n of source) {
-      if (n.s >= min && n.s < max) {
+      if (n.s >= min && n.s <= max) {
         questions.push(n)
       }
     }

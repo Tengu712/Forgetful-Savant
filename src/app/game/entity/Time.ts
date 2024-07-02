@@ -1,7 +1,7 @@
 import type {App} from '@/app/App'
 import type {QuestionManager} from '@/app/game/question/QuestionManager'
 
-const TIME_LIMIT = 240
+const TIME_LIMIT = 300
 
 /**
  * 回答時間に関するオブジェクト

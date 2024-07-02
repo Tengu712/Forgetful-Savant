@@ -5,23 +5,8 @@ fn write_copying(writer: &mut BufWriter<impl Write>, words: Vec<&str>, is_first:
     let t = words[0];
     let a = words[1];
     let x = a.chars().count() as i64;
-    if x > 20 {
-        println!("[ warning ] The length of correct answer must be less than 20: {t}");
-        return;
-    }
-
-    let s = if x <= 7 {
-        std::cmp::max(100000, 60000 * x - 140000)
-    } else {
-        100 * (-40 * x * x + 2400 * x - 12000)
-    };
-    if s < 0 {
-        println!("[ warning ] The raw score is {s}: {t}");
-        return;
-    }
-
+    let s = 200_000 * x - 100_000;
     let c = if is_first { "" } else { ",\n" };
-
     let q = format!(
         "{c}    {{
       \"t\": \"{t}\",
@@ -50,6 +35,9 @@ fn main() {
     let mut is_first = true;
     for line in reader.lines() {
         let line = line.unwrap();
+        if line.starts_with("//") {
+            continue;
+        }
         let words = line.split('|').collect::<Vec<&str>>();
         if words.len() == 2 {
             write_copying(&mut writer, words, is_first);
