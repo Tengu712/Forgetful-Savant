@@ -12,31 +12,31 @@ const TIME_LIMIT = 300
  * - タイムバーを描画する
  */
 export class Time {
-  private readonly app: App
-  private count: number
+	private readonly app: App
+	private count: number
 
-  public constructor(app: App) {
-    this.app = app
-    this.count = 0
-  }
+	public constructor(app: App) {
+		this.app = app
+		this.count = 0
+	}
 
-  public isTimeUp(): boolean {
-    return this.count >= TIME_LIMIT
-  }
+	public isTimeUp(): boolean {
+		return this.count >= TIME_LIMIT
+	}
 
-  public getRatio(): number {
-    return Math.min(1, this.count / TIME_LIMIT)
-  }
+	public getRatio(): number {
+		return Math.min(1, this.count / TIME_LIMIT)
+	}
 
-  public reset() {
-    this.count = 0
-  }
+	public reset() {
+		this.count = 0
+	}
 
-  public update() {
-    this.count += 1
-  }
+	public update() {
+		this.count += 1
+	}
 
-  public draw() {
-    this.app.getRenderer().drawRect(0, 0.15, 1 - this.getRatio(), 0.01, 1, 1, 1)
-  }
+	public draw() {
+		this.app.getRenderer().drawRect(0, 0.15, 1 - this.getRatio(), 0.01, 1, 1, 1)
+	}
 }

@@ -1,3 +1,3 @@
 export interface IScene {
-  update(): IScene
+	update(): IScene
 }

@@ -1,4 +1,4 @@
 export type TypingResult = {
-  readonly keysCount: number
-  readonly isBackspaced: boolean
+	readonly keysCount: number
+	readonly isBackspaced: boolean
 }

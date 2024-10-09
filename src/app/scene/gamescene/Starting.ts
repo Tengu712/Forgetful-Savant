@@ -5,17 +5,17 @@ import type {ISubScene} from './ISubScene'
 import {Playing} from './Playing'
 
 export class Starting implements ISubScene {
-  private readonly app: App
-  private readonly difInfo: DifficultyInformation
+	private readonly app: App
+	private readonly difInfo: DifficultyInformation
 
-  public constructor(app: App, difInfo: DifficultyInformation) {
-    this.app = app
-    this.difInfo = difInfo
-  }
+	public constructor(app: App, difInfo: DifficultyInformation) {
+		this.app = app
+		this.difInfo = difInfo
+	}
 
-  public update(): ISubScene {
-    return new Playing(this.app, this.difInfo)
-  }
+	public update(): ISubScene {
+		return new Playing(this.app, this.difInfo)
+	}
 
-  public draw(): void {}
+	public draw(): void {}
 }

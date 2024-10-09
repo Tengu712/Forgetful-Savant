@@ -1,4 +1,4 @@
 export interface ISubScene {
-  update(): ISubScene
-  draw(): void
+	update(): ISubScene
+	draw(): void
 }

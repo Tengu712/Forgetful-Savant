@@ -1,25 +1,25 @@
 import type {IInputListener} from '@/app/input/IInputListener'
 
 export class InputListener implements IInputListener {
-  private buffer: string[]
-  private previous: string[]
+	private buffer: string[]
+	private previous: string[]
 
-  public constructor() {
-    this.buffer = []
-    this.previous = []
-    document.addEventListener('keydown', (event) => {
-      this.buffer.push(event.key)
-      event.preventDefault()
-      event.stopImmediatePropagation()
-    })
-  }
+	public constructor() {
+		this.buffer = []
+		this.previous = []
+		document.addEventListener('keydown', (event) => {
+			this.buffer.push(event.key)
+			event.preventDefault()
+			event.stopImmediatePropagation()
+		})
+	}
 
-  public update() {
-    this.previous = this.buffer
-    this.buffer = []
-  }
+	public update() {
+		this.previous = this.buffer
+		this.buffer = []
+	}
 
-  public get(): readonly string[] {
-    return this.previous
-  }
+	public get(): readonly string[] {
+		return this.previous
+	}
 }
